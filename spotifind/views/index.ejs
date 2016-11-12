@@ -10,9 +10,15 @@
 		</div>		
 		<p>Click the button to get your coordinates.</p>
 
-		<button onclick="getLocation()">Try It</button>
-
+		<button ng-click="getLocation()">Try It</button>
+		<!--
 		<p id="demo"></p>
+		-->
+		<p>Click to get latitude</p>
+		<div>
+			{{latitude}}
+		</div>
+		<!--
 		<script>
 			var x = document.getElementById("demo");
 
@@ -29,5 +35,6 @@
 			    "<br>Longitude: " + position.coords.longitude;
 			}
 		</script>
+		-->
 	</body>
 </html>
