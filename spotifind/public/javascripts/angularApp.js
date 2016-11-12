@@ -8,19 +8,42 @@ app.config([
 		$stateProvider.state('home', {
 			url: '/home',
 			templateUrl:'/home.html',
-			controller: 'MainCtrl'
+			controller: 'MainCtrl',
+
+			/*resolve: {
+				locationPromise: ['locations', function(locations){
+					return locations.getAll();
+				}]
+			}*/
 		});
+
+		/*.state('locations', {
+			url: '/locations/{id}',
+			templateUrl: '/locations.html',
+			controller: 'LocationsCtrl'
+		});*/
 
 		$urlRouterProvider.otherwise('home');
 
 }]);
 
 
-app.factory('locations', [function(){
+app.factory('locations', ['$http', function($http){
   var o = {
   	locations: []
+
   };
+
+  o.getAll = function() {
+  	return $http.get('/locations').success(function(data){
+  		angular.copy(data, o.locations);
+  	});
+
+  };
+
   return o;
+
+
 }]);
 
 app.controller('MainCtrl', [
@@ -59,3 +82,17 @@ app.controller('MainCtrl', [
 
 
 	]);
+
+/*
+
+app.controller('LocationsCtrl', [
+	'$scope',
+	'$stateParams',
+	'locations'
+
+	function($scope, $stateParams, locations){
+		$scope.location = locations.locations[$stateParams.id];
+
+}]);
+
+*/
