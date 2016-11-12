@@ -6,9 +6,25 @@ var Location = mongoose.model('Location');
 
 
 /* GET home page. */
+
 router.get('/', function(req, res) {
 	res.render('index');
+}); 
+
+/* POST from home page. */
+router.post('/', function(req, res, next) {
+	var location = new Location(req.body);
+
+	location.save(function(err, location){
+		if(err){ return next(err); }
+
+		res.json(location);
+
+	});
+	
+
 });
+
 
 router.get('/locations', function(req, res, next) {
   Location.find(function(err, locations){
