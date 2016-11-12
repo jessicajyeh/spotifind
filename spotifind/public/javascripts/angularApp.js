@@ -1,26 +1,40 @@
-var app = angular.module('spotifind', []);
+var app = angular.module('spotifind', ['ui.router']);
+
+app.config([
+	'$stateProvider',
+	'$urlRouterProvider',
+
+	function($stateProvider, $urlRouterProvider) {
+		$stateProvider.state('home', {
+			url: '/home',
+			templateUrl:'/home.html',
+			controller: 'MainCtrl'
+		});
+
+		$urlRouterProvider.otherwise('home');
+
+}]);
 
 
-app.factory('posts', [function(){
+app.factory('locations', [function(){
   var o = {
-  	posts: []
+  	locations: []
   };
   return o;
 }]);
 
 app.controller('MainCtrl', [
 	'$scope',
-	'posts',
+	'locations',
 
 	//$scope.latitude,
 	//$scope.longitude,
 
-	function($scope, posts){
+	function($scope, locations){
 		$scope.latitude = '0';
 		$scope.longitude = '0';
 		$scope.test = 'Hello World!';
-		$scope.posts = posts.posts;
-		$scope.location_array = [];
+		$scope.locations = locations.locations;
 		//var x = document.getElementById("demo");
 		$scope.getLocation = function(){
 			if (navigator.geolocation) {
@@ -37,7 +51,7 @@ app.controller('MainCtrl', [
 		};
 
 		$scope.saveLocation = function(){
-			 $scope.location_array.push([$scope.latitude, $scope.longitude]);
+			 $scope.locations.push([$scope.latitude, $scope.longitude]);
 		};
 	}
 
