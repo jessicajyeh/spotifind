@@ -7,7 +7,7 @@
 	<body ng-app="spotifind" ng-controller="MainCtrl">
 		<div>
 			{{test}}
-		</div>		
+		</div>
 		<p>Click the button to get your coordinates.</p>
 
 		<button ng-click="getLocation()">Try It</button>
@@ -21,10 +21,13 @@
 		<div>
 			longitude: {{longitude}}
 		</div>
+		<button ng-click="saveLocation()">Save Your Location</button>
+		<div ng-repeat="Location in location_array">
+			{{Location}}
+		</div>
 		<!--
 		<script>
 			var x = document.getElementById("demo");
-
 			function getLocation() {
 			    if (navigator.geolocation) {
 			        navigator.geolocation.getCurrentPosition(showPosition);
@@ -32,7 +35,6 @@
 			        x.innerHTML = "Geolocation is not supported by this browser.";
 			    }
 			}
-
 			function showPosition(position) {
 			    x.innerHTML = "Latitude: " + position.coords.latitude +
 			    "<br>Longitude: " + position.coords.longitude;
@@ -41,3 +43,4 @@
 		-->
 	</body>
 </html>
+Contact GitHub API Training Shop Blog About
