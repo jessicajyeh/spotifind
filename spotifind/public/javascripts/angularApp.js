@@ -10,16 +10,18 @@ app.config([
 			templateUrl:'/home.html',
 			controller: 'MainCtrl',
 
-			resolve: {
+			/*resolve: {
 				locationPromise: ['locations', function(locations){
 					return locations.getAll();
 				}]
-			}
-		}).state('locations', {
+			}*/
+		});
+
+		/*.state('locations', {
 			url: '/locations/{id}',
 			templateUrl: '/locations.html',
 			controller: 'LocationsCtrl'
-		});
+		});*/
 
 		$urlRouterProvider.otherwise('home');
 
@@ -81,6 +83,8 @@ app.controller('MainCtrl', [
 
 	]);
 
+/*
+
 app.controller('LocationsCtrl', [
 	'$scope',
 	'$stateParams',
@@ -90,3 +94,5 @@ app.controller('LocationsCtrl', [
 		$scope.location = locations.locations[$stateParams.id];
 
 }]);
+
+*/
