@@ -10,18 +10,16 @@ app.config([
 			templateUrl:'/home.html',
 			controller: 'MainCtrl',
 
-			/*resolve: {
+			resolve: {
 				locationPromise: ['locations', function(locations){
 					return locations.getAll();
 				}]
-			}*/
-		});
-
-		/*.state('locations', {
+			}
+		}).state('locations', {
 			url: '/locations/{id}',
 			templateUrl: '/locations.html',
 			controller: 'LocationsCtrl'
-		});*/
+		});
 
 		$urlRouterProvider.otherwise('home');
 
@@ -38,9 +36,14 @@ app.factory('locations', ['$http', function($http){
   	return $http.get('/locations').success(function(data){
   		angular.copy(data, o.locations);
   	});
-
   };
 
+
+  o.saveLocation = function() {
+  	return $http.post('/locations', location).success(function(data){
+    	o.locations.push(data);
+  	}); 
+  };
   return o;
 
 
@@ -68,13 +71,19 @@ app.controller('MainCtrl', [
 			}
 		};
 
+
 		$scope.showPosition = function(position){
 			$scope.latitude = position.coords.latitude;
 			$scope.longitude = position.coords.longitude;
 		};
 
 		$scope.saveLocation = function(){
-			 $scope.locations.push([$scope.latitude, $scope.longitude]);
+			locations.saveLocation({
+				
+					latitude: $scope.latitude, 
+					longitude: $scope.longitude,
+
+				});
 		};
 	}
 
@@ -83,16 +92,16 @@ app.controller('MainCtrl', [
 
 	]);
 
-/*
+
 
 app.controller('LocationsCtrl', [
 	'$scope',
 	'$stateParams',
-	'locations'
+	'locations',
 
 	function($scope, $stateParams, locations){
 		$scope.location = locations.locations[$stateParams.id];
+	}
 
-}]);
+]); 
 
-*/
