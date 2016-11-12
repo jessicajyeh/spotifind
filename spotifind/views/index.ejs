@@ -7,7 +7,7 @@
 	<body ng-app="spotifind" ng-controller="MainCtrl">
 		<div>
 			{{test}}
-		</div>		
+		</div>
 		<p>Click the button to get your coordinates.</p>
 
 		<button ng-click="getLocation()">Try It</button>
@@ -17,6 +17,12 @@
 		<p>Click to get latitude</p>
 		<div>
 			{{latitude}}
+			{{longitude}}
+		</div>
+
+		<button ng-click="saveLocation()">Save Your Location</button>
+		<div ng-repeat="Location in location_array">
+			{{Location}}
 		</div>
 		<!--
 		<script>

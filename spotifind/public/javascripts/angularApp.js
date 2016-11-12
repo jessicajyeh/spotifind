@@ -10,18 +10,24 @@ app.controller('MainCtrl', [
 		$scope.latitude = '0';
 		$scope.longitude = '0';
 		$scope.test = 'Hello World!';
+		$scope.location_array = [];
 		//var x = document.getElementById("demo");
 		$scope.getLocation = function(){
 			if (navigator.geolocation) {
-			        navigator.geolocation.getCurrentPosition($scope.showPosition);
-			    } else {
-			        //x.innerHTML = "Geolocation is not supported by this browser.";
+		    	navigator.geolocation.getCurrentPosition($scope.showPosition);
+			}
+			else {
+			    //x.innerHTML = "Geolocation is not supported by this browser.";
 			}
 		};
 
 		$scope.showPosition = function(position){
 			$scope.latitude = position.coords.latitude;
 			$scope.longitude = position.coords.longitude;
+		};
+
+		$scope.saveLocation = function(){
+			 $scope.location_array.push([$scope.latitude, $scope.longitude]);
 		};
 	}
 
