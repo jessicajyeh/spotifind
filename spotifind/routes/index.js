@@ -28,4 +28,19 @@ router.post('/locations', function(req, res, next) {
 
 });
 
+router.param('location', function(req, res, next, id) {
+	var query = Location.findById(id);
+
+	query.exec(function(err, location) {
+		if (err) {return next(err); }
+		if (!location) { return next(new Error('can\'t find location')); }
+		req.location = location;
+		return next();
+	});
+});
+
+router.get('/locations/:location', function(req, res) {
+	res.json(req.location);
+});
+
 module.exports = router;
