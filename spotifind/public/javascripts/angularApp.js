@@ -8,13 +8,17 @@ app.config([
 		$stateProvider.state('home', {
 			url: '/home',
 			templateUrl:'/home.html',
-			controller: 'MainCtrl',
+			controller: 'MainCtrl'
 
+
+			//,
+			/*
 			resolve: {
 				locationPromise: ['locations', function(locations){
 					return locations.getAll();
 				}]
-			}
+			}*/
+
 		}).state('locations', {
 			url: '/locations/{id}',
 			templateUrl: '/locations.html',
@@ -81,7 +85,12 @@ app.controller('MainCtrl', [
 			locations.saveLocation({
 					"latitude": $scope.latitude, 
 					"longitude": $scope.longitude,
+					"playListID": $scope
 			});
+		};
+
+		$scope.getSavedLocations = function(){
+			locations.getAll();
 		};
 	}
 

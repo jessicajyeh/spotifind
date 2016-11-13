@@ -32,6 +32,14 @@
 				longitude: {{longitude}}
 			</div>
 			<button ng-click="saveLocation()">Save Your Location</button>
+			<!--
+			<div ng-repeat="Location in locations">
+				{{Location}}
+			</div>
+			-->
+
+
+			<button ng-click="getSavedLocations()">Get Saved Locations</button>
 			<div ng-repeat="Location in locations">
 				{{Location}}
 			</div>
