@@ -23,6 +23,10 @@ app.config([
 			url: '/locations/{id}',
 			templateUrl: '/locations.html',
 			controller: 'LocationsCtrl'
+		}).state('playlist', {
+			url: '/playlist',
+			templateUrl: '/playlist.html',
+			controller: 'MainCtrl'
 		});
 
 		$urlRouterProvider.otherwise('home');
@@ -46,7 +50,7 @@ app.factory('locations', ['$http', function($http){
   o.saveLocation = function(location) {
   	return $http.post('/locations', location).success(function(data){
     	o.locations.push(data);
-  	}); 
+  	});
   };
   return o;
 
@@ -83,11 +87,15 @@ app.controller('MainCtrl', [
 
 		$scope.saveLocation = function(){
 			locations.saveLocation({
-					"latitude": $scope.latitude, 
+					"latitude": $scope.latitude,
 					"longitude": $scope.longitude,
 					"playListID": $scope
 			});
 		};
+
+
+	
+
 
 		$scope.getSavedLocations = function(){
 			locations.getAll();
@@ -110,5 +118,4 @@ app.controller('LocationsCtrl', [
 		$scope.location = locations.locations[$stateParams.id];
 	}
 
-]); 
-
+]);

@@ -9,8 +9,12 @@ var Location = mongoose.model('Location');
 
 router.get('/', function(req, res) {
 	res.render('index');
-}); 
+});
 
+/* Get playlist page */
+router.get('/playlist', function(req, res) {
+	res.render('playlist');
+});
 /* POST from home page. */
 router.post('/', function(req, res, next) {
 	var location = new Location(req.body);
@@ -21,7 +25,7 @@ router.post('/', function(req, res, next) {
 		res.json(location);
 
 	});
-	
+
 
 });
 
@@ -44,7 +48,7 @@ router.post('/locations', function(req, res, next) {
 		res.json(location);
 
 	});
-	
+
 
 });
 
