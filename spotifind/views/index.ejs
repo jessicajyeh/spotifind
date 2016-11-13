@@ -71,16 +71,27 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Spotifind</a>
+			<div class="text-primary">
+      	<a class="navbar-brand" href="#">Spotifind</a>
+			</div>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Playlists</a></li>
-      <li><a href="#">Login</a></li>
-      <li><a href="#">Settings</a></li>
+      	<li class="active"><a href="#">Home</a></li>
+				<li><a href="#">Login</a></li>
+				<li class="dropdown">
+                	<a href="#" data-toggle="dropdown" class="dropdown-toggle">New Playlist <b class="caret"></b></a>
+                	<ul class="dropdown-menu">
+				<form>
+					<li class="form-group">
+						  <a label for="playlistname">Playlist Name:</label>
+						  <textarea class="form-control" rows="1" id="playlistname"></textarea></a>
+				</form>
     </ul>
   </div>
 </nav>
+<script>
+
+</script>
 
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
