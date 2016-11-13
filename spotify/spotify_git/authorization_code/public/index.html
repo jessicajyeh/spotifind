@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Example of the Authorization Code flow with Spotify</title>
+    <title>Spotifind</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <style type="text/css">
       #login, #loggedin {
@@ -19,7 +19,7 @@
   <body>
     <div class="container">
       <div id="login">
-        <h1>This is an example of the Authorization Code flow</h1>
+        <h1>Spotifind</h1>
         <a href="/login" class="btn btn-primary">Log in with Spotify</a>
       </div>
       <div id="loggedin">
@@ -27,9 +27,12 @@
         </div>
         <div id="playlists">
         </div>
+        <div id="playlist-names">
+        </div>
         <div id="oauth">
         </div>
         <button class="btn btn-default" id="obtain-new-token">Obtain new token using the refresh token</button>
+        <button class="btn btn-default" id="make-playlist" onclick="createPlaylist()">Make a new playlist</button>
       </div>
     </div>
 
@@ -55,14 +58,7 @@
 
     <script id="playlist-template" type="text/x-handlebars-template">
       <dl class="dl-horizontal">
-        <dt>Number of Playlists</dt><dd>{{total}}</dd>
-        <script>
-        var list = [];
-        for (i=0; i < {{total}}; i++){
-          list += {{items}}[i].{{name}};
-        }
-        </script>
-        <dt>Playlist Names</dt> 
+        <dt>Playlist Names</dt>
       </dl>
       <div></div>
     </script>
@@ -77,6 +73,8 @@
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+
     <script>
       (function() {
 
@@ -101,7 +99,6 @@
         var userPlaylistSource = document.getElementById('playlist-template').innerHTML,
             userPlaylistTemplate  = Handlebars.compile(userPlaylistSource), 
             userPlaylistPlaceholder = document.getElementById('playlists');
-        console.log('ok');
 
         var oauthSource = document.getElementById('oauth-template').innerHTML,
             oauthTemplate = Handlebars.compile(oauthSource),
@@ -139,12 +136,17 @@
 
             $.ajax({
                 //console.log({{id}});
-                url: 'https://api.spotify.com/v1/users/jessicayeh/playlists',
+                url: 'https://api.spotify.com/v1/me/playlists',
                 headers: {
                   'Authorization': 'Bearer ' + access_token
                 },
                 success: function(response) {
                   userPlaylistPlaceholder.innerHTML = userPlaylistTemplate(response);
+                  var list = [];
+                  for (i=0; i < response.items.length; i++){
+                    list.push(response.items[i].name);
+                  }
+                  document.getElementById('playlist-names').innerHTML = list;
 
                   $('#login').hide();
                   $('#loggedin').show();
@@ -174,6 +176,20 @@
         }
       })();
     </script>
+
+    <script>
+      // var getPlaylists = function() {
+        var list = [];
+        for (i=0; i < 3; i++){
+          console.log('sigh');
+          //list += "{{items}}"[i]."{{name}}";
+          list += [1];
+        }
+        document.getElementById('playlist-names').innerHTML = list[0];
+      // };
+      // getPlaylists();
+    </script>
+
   </body>
 </html>
 

@@ -21,6 +21,28 @@ var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
  * @param  {number} length The length of the string
  * @return {string} The generated string
  */
+
+/*
+var getPlaylists = function() {
+  var list = [];
+  for (i=0; i < total; i++){
+    list += items[i].name;
+  }
+  console.log('fml');
+  document.getElementById('playlist-names').innerHTML = list[0];
+}; 
+*/
+
+
+var getPlaylists = function(access_token) {
+  return $.ajax({
+    url: 'https://api.spotify.com/v1/users/jessicayeh/playlists',
+    headers: {
+      'Authorization': 'Bearer' + access_token
+    }
+  });
+};
+
 var generateRandomString = function(length) {
   var text = '';
   var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -97,7 +119,7 @@ app.get('/callback', function(req, res) {
         };
 
         var playlist_options = {
-          url: 'https://api.spotify.com/v1/users/jessicayeh/playlists',
+          url: 'https://api.spotify.com/v1/me/playlists',
           headers: { 'Authorization': 'Bearer ' + access_token },
           json: true
         };
@@ -150,6 +172,31 @@ app.get('/refresh_token', function(req, res) {
     }
   });
 });
+
+
+function createPlaylist(name, callback) {
+  console.log('createPlaylist', name);
+  var url = 'https://api.spotify.com/v1/me/playlists';
+  $.ajax(url, {
+    method: 'POST',
+    data: JSON.stringify({
+      'name': name,
+      'public': false
+    }),
+    dataType: 'json',
+    headers: {
+      'Authorization': 'Bearer ' + g_access_token,
+      'Content-Type': 'application/json'
+    },
+    success: function(r) {
+      console.log('create playlist response', r);
+      callback(r.id);
+    },
+    error: function(r) {
+      callback(null);
+    }
+  });
+}
 
 console.log('Listening on 8888');
 app.listen(8888);
