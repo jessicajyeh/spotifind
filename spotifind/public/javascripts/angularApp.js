@@ -83,7 +83,7 @@ app.controller('MainCtrl', [
 					latitude: $scope.latitude, 
 					longitude: $scope.longitude,
 
-				});
+			});
 		};
 	}
 
