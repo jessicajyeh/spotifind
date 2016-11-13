@@ -62,7 +62,7 @@
           list += {{items}}[i].{{name}};
         }
         </script>
-        <dt>Playlist Names</dt><script>list</script>
+        <dt>Playlist Names</dt> 
       </dl>
       <div></div>
     </script>
@@ -138,7 +138,7 @@
             });
 
             $.ajax({
-                console.log({{id}});
+                //console.log({{id}});
                 url: 'https://api.spotify.com/v1/users/jessicayeh/playlists',
                 headers: {
                   'Authorization': 'Bearer ' + access_token
