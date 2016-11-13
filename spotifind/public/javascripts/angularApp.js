@@ -102,12 +102,7 @@ app.controller('MainCtrl', [
 		};
 	}
 
-
-
-
 	]);
-
-
 
 app.controller('LocationsCtrl', [
 	'$scope',
