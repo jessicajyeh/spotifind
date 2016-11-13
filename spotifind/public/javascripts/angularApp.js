@@ -39,7 +39,7 @@ app.factory('locations', ['$http', function($http){
   };
 
 
-  o.saveLocation = function() {
+  o.saveLocation = function(location) {
   	return $http.post('/locations', location).success(function(data){
     	o.locations.push(data);
   	}); 
@@ -79,10 +79,8 @@ app.controller('MainCtrl', [
 
 		$scope.saveLocation = function(){
 			locations.saveLocation({
-				
-					latitude: $scope.latitude, 
-					longitude: $scope.longitude,
-
+					"latitude": $scope.latitude, 
+					"longitude": $scope.longitude,
 			});
 		};
 	}

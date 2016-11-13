@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 require('./models/Locations');
 
-mongoose.connect('mongodb://localhost/spotifind');
+mongoose.connect('mongodb://localhost/spotifind_locations');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
