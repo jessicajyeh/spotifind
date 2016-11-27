@@ -1,55 +1,78 @@
-<html>
-	<head>
-		<title>SpotiFind</title>
-		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>		
-		<script src="/javascripts/angularApp.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
-	</head>
-	<body ng-app="spotifind">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>SpotiFind</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+			<div class="text-primary">
+      	<a class="navbar-brand" href="#">Spotifind</a>
+			</div>
+    </div>
+    <ul class="nav navbar-nav">
+      	<li class="active"><a href="#">Home</a></li>
+				<li><a href="#">Login</a></li>
+				<li class="dropdown">
+                	<a href="#" data-toggle="dropdown" class="dropdown-toggle">New Playlist <b class="caret"></b></a>
+                	<ul class="dropdown-menu">
+				<form>
+					<li class="form-group">
+						  <a label for="playlistname">Playlist Name:</label>
+						  <textarea class="form-control" rows="1" id="playlistname"></textarea></a>
+				</form>
+    </ul>
+  </div>
+</nav>
+<script>
+
+</script>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <title>Google Maps Multiple Markers</title>
+  <script src="http://maps.google.com/maps/api/js?sensor=false"
+          type="text/javascript"></script>
+</head>
+<body>
+  <div id="map" style="width: 100% ; height: 600px;" ng-app="spotifind" ng-controller="LocationsCtrl">
+  
+  <script>
+	$(document).ready(function(){
 		
-		<div>
-			<ui-view></ui-view>
-		</div>
+		var $element = $('div[ng-controller="LocationsCtrl"]');
+		//var scope = angular.element($element).scope();
+	    //var locations = scope.locations;
 
-		<script type="text/ng-template" id="/home.html">
-			<div class="page-header">
-				<h1>SpotiFind</h1>
-			</div>
-			<div>
-				{{test}}
-			</div>
-			<p>Click the button to get your coordinates.</p>
+	    var locations = [];
+	    var map = new google.maps.Map(document.getElementById('map'), {
+	      zoom: 10,
+	      center: new google.maps.LatLng(-33.92, 151.25),
+	      mapTypeId: google.maps.MapTypeId.ROADMAP
+	    });
+	    var infowindow = new google.maps.InfoWindow({
+		});
+	    var /*marker,*/ i;
+	    for (i = 0; i < locations.length; i++) {
+	      var marker = new google.maps.Marker({
+	        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+	        map: map,
+					url: 'playlist'
+	      });
 
-			<button ng-click="getLocation()">Try It</button>
-			<!--
-			<p id="demo"></p>
-			-->
-			<p>Click to get latitude and latitude</p>
-			<div>
-				latitude: {{latitude}}
-			</div>
-			<div>
-				longitude: {{longitude}}
-			</div>
-			<button ng-click="saveLocation()">Save Your Location</button>
-			<!--
-			<div ng-repeat="Location in locations">
-				{{Location}}
-			</div>
-			-->
-
-
-			<button ng-click="getSavedLocations()">Get Saved Locations</button>
-			<div ng-repeat="Location in locations">
-				{{Location}}
-			</div>
-
-		</script>
-
-		<script type="text/ng-template" id="/locations.html">
-			<div ng-repeat="Location in locations">
-				{{Location}}
-			</div>			
-		</script>
-	</body>
+		google.maps.event.addListener(marker, 'click', function() {
+			window.location.href = this.url+"?pos="+this.position;
+		});
+	    }
+	});
+  </script>
+  </div>
+</body>
 </html>
